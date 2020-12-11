@@ -7,6 +7,7 @@ public class Client extends Entity{
     private String codePostalClient;
     private int idVille;
 
+    public Client(){}
     public int getIdClient() {
         return idClient;
     }
