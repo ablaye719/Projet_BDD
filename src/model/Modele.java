@@ -1,22 +1,22 @@
 package model;
 
-public class Modèle extends Entity{
+public class Modele extends Entity{
     private int id;
-    private String dénomination;
+    private String denomination;
     private int puissanceFiscale;
 
-    public Modèle(){this(0);}
-    public Modèle(int id){
+    public Modele(){this(0);}
+    public Modele(int id){
         this(id,null,0);
     }
-    public Modèle(String dénomination){
-        this.dénomination=dénomination;
+    public Modele(String denomination){
+        this.denomination = denomination;
     }
 
-    public Modèle(int id, String dénomination,int puissanceFiscale){
+    public Modele(int id, String denomination, int puissanceFiscale){
         super();
         this.id=id;
-        this.dénomination=dénomination;
+        this.denomination = denomination;
         this.puissanceFiscale=puissanceFiscale;
     }
 
@@ -24,8 +24,8 @@ public class Modèle extends Entity{
         return id;
     }
 
-    public String getDénomination() {
-        return dénomination;
+    public String getDenomination() {
+        return denomination;
     }
 
     public int getPuissanceFiscale() {
@@ -36,8 +36,8 @@ public class Modèle extends Entity{
         this.id = id;
     }
 
-    public void setDénomination(String dénomination) {
-        this.dénomination = dénomination;
+    public void setDenomination(String denomination) {
+        this.denomination = denomination;
     }
 
     public void setPuissanceFiscale(int puissanceFiscale) {

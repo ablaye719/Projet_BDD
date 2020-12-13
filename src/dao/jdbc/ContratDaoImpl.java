@@ -1,30 +1,27 @@
 package dao.jdbc;
 
-import dao.Dao;
 import dao.exception.DaoException;
-import dao.jdbc.JdbcDao;
 import model.Entity;
 import model.Contrat;
 import model.Client;
 import model.Vehicule;
 import model.Agence;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class ContratDaoImpl extends dao.jdbc.JdbcDao {
 
-    private jdbc.ClientDaoImpl clientDao;
-    private jdbc.VehiculeDaoImpl véhiculeDao;
-    private jdbc.AgenceDaoImpl agenceDao;
+    private ClientDaoImpl clientDao;
+    private VehiculeDaoImpl véhiculeDao;
+    private AgenceDaoImpl agenceDao;
 
 
     public ContratDaoImpl(Connection connection) {
         super(connection);
-        clientDao = new jdbc.ClientDaoImpl(connection);
-        véhiculeDao = new jdbc.VehiculeDaoImpl(connection);
-        agenceDao = new jdbc.AgenceDaoImpl(connection);
+        clientDao = new ClientDaoImpl(connection);
+        véhiculeDao = new VehiculeDaoImpl(connection);
+        agenceDao = new AgenceDaoImpl(connection);
 
 
     }
@@ -32,9 +29,9 @@ public class ContratDaoImpl extends dao.jdbc.JdbcDao {
     @Override
     public Collection<Entity> findAll() throws DaoException {
         Collection<Entity> contrats = new ArrayList<>();
-        jdbc.ClientDaoImpl clientDao = new jdbc.ClientDaoImpl(connection);
-        jdbc.VehiculeDaoImpl véhiculeDao = new jdbc.VehiculeDaoImpl(connection);
-        jdbc.AgenceDaoImpl agenceDao = new jdbc.AgenceDaoImpl(connection);
+        ClientDaoImpl clientDao = new ClientDaoImpl(connection);
+        VehiculeDaoImpl vehiculeDao = new VehiculeDaoImpl(connection);
+        AgenceDaoImpl agenceDao = new AgenceDaoImpl(connection);
 
         try {
             Statement statement = connection.createStatement();
@@ -50,8 +47,8 @@ public class ContratDaoImpl extends dao.jdbc.JdbcDao {
 
                 Client client = (Client) clientDao.findById(resultSet.getInt("idClient"));
                 contrat.setClient(client);
-                Vehicule vehicule = (Vehicule) véhiculeDao.findById(resultSet.getString("immatriculation"));
-                contrat.setVéhicule(vehicule);
+                Vehicule vehicule = (Vehicule) vehiculeDao.findById(resultSet.getInt("immatriculation"));
+                contrat.setVehicule(vehicule);
                 Agence agence = (Agence) agenceDao.findById(resultSet.getInt("idAgence"));
                 contrat.setAgence(agence);
 
@@ -91,8 +88,8 @@ public class ContratDaoImpl extends dao.jdbc.JdbcDao {
 
                 Client client = (Client) clientDao.findById(resultSet.getInt("idClient"));
                 contrat.setClient(client);
-                Vehicule vehicule = (Vehicule) véhiculeDao.findById(resultSet.getString("immatriculation"));
-                contrat.setVéhicule(vehicule);
+                Vehicule vehicule = (Vehicule) véhiculeDao.findById(resultSet.getInt("immatriculation"));
+                contrat.setVehicule(vehicule);
                 Agence agence = (Agence) agenceDao.findById(resultSet.getInt("idAgence"));
                 contrat.setAgence(agence);
             }

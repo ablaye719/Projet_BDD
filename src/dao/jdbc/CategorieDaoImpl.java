@@ -1,4 +1,4 @@
-package jdbc;//package dao.jdbc;
+package dao.jdbc;//package dao.jdbc;
 
 import dao.exception.DaoException;
 import model.Categorie;
@@ -16,23 +16,23 @@ public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
     }
 
     @Override public Collection<Entity> findAll() throws DaoException {
-        Collection<Entity> catégories = new ArrayList<>();
+        Collection<Entity> categories = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Type");
 
             while (resultSet.next()) {
-                Categorie catégorie = new Categorie();
-                catégorie.setId(resultSet.getInt("idCatégorie"));
-                catégorie.setLibellé(resultSet.getString("LibelléCatégorie"));
-                catégories.add(catégorie);
+                Categorie categorie = new Categorie();
+                categorie.setId(resultSet.getInt("idCatégorie"));
+                categorie.setLibellé(resultSet.getString("LibelléCatégorie"));
+                categories.add(categorie);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-        return catégories;
+        return categories;
     }
 
     @Override

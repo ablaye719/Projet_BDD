@@ -1,10 +1,11 @@
 package model;
 
 public class Vehicule extends Entity{
+    private int immatriculation;
     private String dateMiseEnCirculation;
     private String etat;
-    private int nbKilometres;
-    private int prixJourLocation;
+    private double nbKilometres;
+    private double prixJourLocation;
     private int idMarque;
     private int idModele;
     private int idCategorie;
@@ -29,25 +30,22 @@ public class Vehicule extends Entity{
         this.etat = etat;
     }
 
-    public int getNbKilometres() {
+    public double getNbKilometres() {
         return nbKilometres;
     }
 
-    public void setNbKilometres(int nbKilometres) {
+    public void setNbKilometres(double nbKilometres) {
         this.nbKilometres = nbKilometres;
     }
 
-    public int getPrixJourLocation() {
+    public double getPrixJourLocation() {
         return prixJourLocation;
     }
 
-    public void setPrixJourLocation(int prixJourLocation) {
+    public void setPrixJourLocation(double prixJourLocation) {
         this.prixJourLocation = prixJourLocation;
     }
 
-    public int getIdMarque() {
-        return idMarque;
-    }
 
     public void setIdMarque(int idMarque) {
         this.idMarque = idMarque;
@@ -83,5 +81,17 @@ public class Vehicule extends Entity{
 
     public void setIdAgence(int idAgence) {
         this.idAgence = idAgence;
+    }
+
+    public int getImmatriculation() {
+        return immatriculation;
+    }
+
+    public void setImmatriculation(int immatriculation) {
+        this.immatriculation = immatriculation;
+    }
+
+    public int getIdMarque() {
+        return idMarque;
     }
 }

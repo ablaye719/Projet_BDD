@@ -7,7 +7,7 @@ public class Contrat extends Entity {
     private float kmRetrait;
     private float kmRetour;
     private Client client;
-    private Véhicule véhicule;
+    private Vehicule vehicule;
     private Agence agence;
 
     public Contrat(){
@@ -19,7 +19,7 @@ public class Contrat extends Entity {
     public Contrat(int id,String dateDeRetrait,String dateDeRetour,float kmRetrait,float kmRetour){
         this(id,dateDeRetrait,dateDeRetour,kmRetrait,kmRetour,null,null,null);
     }
-    public Contrat(int id,String dateDeRetrait,String dateDeRetour,float kmRetrait,float kmRetour,Client client,Véhicule véhicule,Agence agence){
+    public Contrat(int id,String dateDeRetrait,String dateDeRetour,float kmRetrait,float kmRetour,Client client,Vehicule vehicule,Agence agence){
         super();
         this.id=id;;
         this.dateDeRetrait=dateDeRetrait;
@@ -27,7 +27,7 @@ public class Contrat extends Entity {
         this.kmRetrait=kmRetrait;
         this.kmRetour=kmRetour;
         this.client=client;
-        this.véhicule=véhicule;
+        this.vehicule=vehicule;
         this.agence=agence;
     }
 
@@ -43,6 +43,7 @@ public class Contrat extends Entity {
         return dateDeRetour;
     }
 
+
     public float getKmRetrait() {
         return kmRetrait;
     }
@@ -55,8 +56,8 @@ public class Contrat extends Entity {
         return client;
     }
 
-    public Véhicule getVéhicule() {
-        return véhicule;
+    public Vehicule getVehicule() {
+        return vehicule;
     }
 
     public Agence getAgence() {
@@ -87,8 +88,8 @@ public class Contrat extends Entity {
         this.client = client;
     }
 
-    public void setVéhicule(Véhicule véhicule) {
-        this.véhicule = véhicule;
+    public void setVehicule(Vehicule vehicule) {
+        this.vehicule = vehicule;
     }
 
     public void setAgence(Agence agence) {

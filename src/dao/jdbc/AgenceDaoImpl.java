@@ -1,9 +1,9 @@
 package dao.jdbc;
 
-import dao.Dao;
 import dao.exception.DaoException;
 import model.Agence;
 import model.Entity;
+import model.Ville;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,8 +24,11 @@ public class AgenceDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM agence");
             while (resultSet.next()){
                 Agence agence = new Agence();
-                agence.setIdAgence(resultSet.getInt("idagence"));
-                agence.setNbEmployes(resultSet.getInt("nbemployes"));
+                agence.setIdAgence(resultSet.getInt("idgence"));
+                agence.setNbEmployes(resultSet.getInt("neemployes"));
+                VilleDaoImpl villeDao = new VilleDaoImpl(connection);
+                Ville ville = (Ville) villeDao.findById(resultSet.getInt("idville"));
+                agence.setIdVille(ville.getIdVille());
                 agences.add(agence);
 
             }

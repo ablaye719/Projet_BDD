@@ -1,9 +1,7 @@
 package jdbc;
 
-import dao.Dao;
 import dao.exception.DaoException;
-import dao.jdbc.JdbcDao;
-import jdk.jfr.EventFactory;
+import dao.jdbc.ContratDaoImpl;
 import model.Entity;
 import model.Facture;
 import model.Contrat;
@@ -14,18 +12,17 @@ import java.util.Collection;
 
 public class FactureDaoImpl extends dao.jdbc.JdbcDao {
 
-    private jdbc.ContratDaoImpl contratDao;
+    private ContratDaoImpl contratDao;
 
     public FactureDaoImpl(Connection connection) {
         super(connection);
-        connection = new jdbc.ContratDaoImpl(connection);
 
     }
 
     @Override
     public Collection<Entity> findAll() throws DaoException {
         Collection<Entity> factures = new ArrayList<>();
-        jdbc.ContratDaoImpl contratDao = new jdbc.ContratDaoImpl(connection);
+        ContratDaoImpl contratDao = new ContratDaoImpl(connection);
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Facture");

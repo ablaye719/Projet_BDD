@@ -1,20 +1,20 @@
 package model;
 
-public class Catégorie extends Entity {
+public class Categorie extends Entity {
 
     private int id;
     private String libellé;
 
-    public Catégorie(){
+    public Categorie(){
         this(0);
     }
-    public Catégorie(int id){
+    public Categorie(int id){
         this(id,null);
     }
-    public Catégorie(String libellé){
+    public Categorie(String libellé){
         this.libellé=libellé;
     }
-    public Catégorie(int id,String libellé){
+    public Categorie(int id, String libellé){
         super();
         this.id=id;
         this.libellé=libellé;

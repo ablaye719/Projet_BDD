@@ -1,4 +1,4 @@
-package jdbc;//package dao.jdbc;
+package dao.jdbc;//package dao.jdbc;
 
 import dao.exception.DaoException;
 import model.Entity;
@@ -16,32 +16,32 @@ public class ModeleDaoImpl extends dao.jdbc.JdbcDao {
     }
 
     @Override public Collection<Entity> findAll() throws DaoException {
-        Collection<Entity> modèles = new ArrayList<>();
+        Collection<Entity> modeles = new ArrayList<>();
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Modèle");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM modele");
 
             while (resultSet.next()) {
-                Modele modèle = new Modele();
-                modèle.setId(resultSet.getInt("idModèle"));
-                modèle.setDénomination(resultSet.getString("dénomination"));
-                modèle.setPuissanceFiscale(resultSet.getInt("puissanceFiscale"));
+                Modele modele = new Modele();
+                modele.setId(resultSet.getInt("idModèle"));
+                modele.setDenomination(resultSet.getString("dénomination"));
+                modele.setPuissanceFiscale(resultSet.getInt("puissanceFiscale"));
 
-                modèles.add(modèle);
+                modeles.add(modele);
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-        return modèles;
+        return modeles;
     }
 
     @Override
     public Entity findById(int id) throws DaoException {
-        Modele modèle = null;
+        Modele modele = null;
 
-        String sqlReq = "SELECT * FROM Modèle WHERE idModèle = ?";
+        String sqlReq = "SELECT * FROM modele WHERE idmodele = ?";
 
         PreparedStatement statement = null;
         try {
@@ -50,27 +50,27 @@ public class ModeleDaoImpl extends dao.jdbc.JdbcDao {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                modèle = new Modele();
-                modèle.setId(resultSet.getInt("idModèle"));
-                modèle.setDénomination(resultSet.getString("dénomination"));
-                modèle.setPuissanceFiscale(resultSet.getInt("puissanceFiscale"));
+                modele = new Modele();
+                modele.setId(resultSet.getInt("idModèle"));
+                modele.setDenomination(resultSet.getString("dénomination"));
+                modele.setPuissanceFiscale(resultSet.getInt("puissanceFiscale"));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-        return modèle;
+        return modele;
 
     }
 
     @Override
     public void create(Entity entity) throws DaoException {
 
-        Modele modèle = (Modele) entity;
+        Modele modele = (Modele) entity;
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into Modèle (idModèle,dénomination,puissanceFiscale) values (?,?,?)";
+        String sqlReq = "insert into modele (idmodele,denomination,puissanceFiscale) values (?,?,?)";
 
         try {
 
@@ -78,9 +78,9 @@ public class ModeleDaoImpl extends dao.jdbc.JdbcDao {
 
             // stmt.setInt(1, 5);
 
-            stmt.setInt(1, modèle.getId());
-            stmt.setString(2,modèle.getDénomination());
-            stmt.setInt(3,modèle.getPuissanceFiscale());
+            stmt.setInt(1, modele.getId());
+            stmt.setString(2,modele.getDenomination());
+            stmt.setInt(3,modele.getPuissanceFiscale());
 
             int res = stmt.executeUpdate();
             if (res > 0) {
@@ -104,7 +104,7 @@ public class ModeleDaoImpl extends dao.jdbc.JdbcDao {
         try {
             statement = connection.prepareStatement(sqlReq);
 
-            statement.setString(1, modèle.getDénomination());
+            statement.setString(1, modèle.getDenomination());
             statement.setInt(2, modèle.getId());
 
             int res = statement.executeUpdate();
@@ -116,20 +116,16 @@ public class ModeleDaoImpl extends dao.jdbc.JdbcDao {
 
     @Override
     public void delete(Entity entity) throws DaoException {
-        Modele modèle = (Modele) entity;
-
+        Modele modele = (Modele) entity;
         PreparedStatement statement = null;
-
         String sqlReq = "delete from Modèle where idModèle = ?";
         try {
             statement = connection.prepareStatement(sqlReq);
-            statement.setInt(1, modèle.getId());
-
+            statement.setInt(1, modele.getId());
             int res = statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
     }
-
 }

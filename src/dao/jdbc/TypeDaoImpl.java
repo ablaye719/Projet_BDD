@@ -1,10 +1,8 @@
-package jdbc;//package dao.jdbc;
+package dao.jdbc;//package dao.jdbc;
 
 import dao.exception.DaoException;
 import model.Entity;
 import model.Type;
-
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +23,7 @@ public class TypeDaoImpl extends dao.jdbc.JdbcDao {
             while (resultSet.next()) {
                 Type type = new Type();
                 type.setId(resultSet.getInt("idType"));
-                type.setLibellé(resultSet.getString("libelléType"));
+                type.setLibelle(resultSet.getString("libelléType"));
                 types.add(type);
             }
         } catch (SQLException e) {
@@ -50,7 +48,7 @@ public class TypeDaoImpl extends dao.jdbc.JdbcDao {
             while (resultSet.next()) {
                 type = new Type();
                 type.setId(resultSet.getInt("idType"));
-                type.setLibellé(resultSet.getString("libelléType"));
+                type.setLibelle(resultSet.getString("libelléType"));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
@@ -75,7 +73,7 @@ public class TypeDaoImpl extends dao.jdbc.JdbcDao {
 
             // stmt.setInt(1, 5);
             stmt.setInt(1,type.getId());
-            stmt.setString(2, type.getLibellé());
+            stmt.setString(2, type.getLibelle());
 
             int res = stmt.executeUpdate();
             if (res > 0) {
@@ -99,7 +97,7 @@ public class TypeDaoImpl extends dao.jdbc.JdbcDao {
         try {
             statement = connection.prepareStatement(sqlReq);
 
-            statement.setString(1, type.getLibellé());
+            statement.setString(1, type.getLibelle());
             statement.setInt(2, type.getId());
 
             int res = statement.executeUpdate();
