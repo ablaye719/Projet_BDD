@@ -14,7 +14,7 @@ public class Categorie extends Entity {
     public Categorie(String libellé){
         this.libellé=libellé;
     }
-    public Categorie(int id, String libellé){
+    public Categorie(int id, String libelle){
         super();
         this.id=id;
         this.libellé=libellé;
@@ -32,7 +32,7 @@ public class Categorie extends Entity {
         return libellé;
     }
 
-    public void setLibellé(String libellé) {
+    public void setLibelle(String libellé) {
         this.libellé = libellé;
     }
 }

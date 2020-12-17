@@ -1,6 +1,5 @@
 package dao.jdbc;
 
-import com.sun.source.tree.TryTree;
 import dao.exception.DaoException;
 import model.Entity;
 import model.Ville;
@@ -22,8 +21,8 @@ public class VilleDaoImpl extends JdbcDao{
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ville");
             while(resultSet.next()){
-                Ville ville = new Ville();
-                ville.setNombreHabitants(resultSet.getInt("nbhabitants"));
+                Ville ville = new Ville(2);
+                ville.setNombreHabitants(resultSet.getInt("nombrehabitants"));
                 ville.setNomVille(resultSet.getString("nomville"));
                 ville.setIdVille(resultSet.getInt("idville"));
                 villes.add(ville);
@@ -36,14 +35,14 @@ public class VilleDaoImpl extends JdbcDao{
 
     @Override
     public Entity findById(int id) throws DaoException {
-        Ville ville = new Ville();
+        Ville ville = new Ville(2);
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM ville WHERE idville="+id);
             while (resultSet.next()){
                 ville.setIdVille(resultSet.getInt("idville"));
                 ville.setNomVille(resultSet.getString("nomville"));
-                ville.setNombreHabitants(resultSet.getInt("nbhabitants"));
+                ville.setNombreHabitants(resultSet.getInt("nombrehabitants"));
 
             }
         }catch (SQLException e){
@@ -56,13 +55,14 @@ public class VilleDaoImpl extends JdbcDao{
     public void create(Entity entity) throws DaoException {
         Ville ville = (Ville) entity;
         PreparedStatement statement = null;
-        String rqSql = "INSERT INTO ville(idville,nomville, nombrehabitants) VALUES(?,?,?)";
+        String rqSql = "INSERT INTO ville(idville ,nomville, nombrehabitants) VALUES(?,?,?)";
         try {
             statement  = connection.prepareStatement(rqSql);
-            int res = statement.executeUpdate();
             statement.setInt(1,ville.getIdVille());
             statement.setString(2,ville.getNomVille());
             statement.setInt(3,ville.getNombreHabitants());
+            int res = statement.executeUpdate();
+
             if(res>0){
                 System.out.println("Nouvelle ville insérée");
             }
@@ -76,12 +76,12 @@ public class VilleDaoImpl extends JdbcDao{
     public void update(Entity entity) throws DaoException {
         Ville ville = (Ville) entity;
         PreparedStatement statement = null;
-        String rqSql = "UPDATE ville SET idville = ?, nomville = ?, nombreehabitants =  ?";
+        String rqSql = "UPDATE ville SET  nomville = ?, nombrehabitants =  ? WHERE idville = ?";
         try {
             statement = connection.prepareStatement(rqSql);
-            statement.setInt(1,ville.getIdVille());
-            statement.setString(2,ville.getNomVille());
-            statement.setInt(3,ville.getNombreHabitants());
+            statement.setInt(3,ville.getIdVille());
+            statement.setString(1,ville.getNomVille());
+            statement.setInt(2,ville.getNombreHabitants());
             int res = statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);

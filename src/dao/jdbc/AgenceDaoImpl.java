@@ -24,8 +24,8 @@ public class AgenceDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM agence");
             while (resultSet.next()){
                 Agence agence = new Agence();
-                agence.setIdAgence(resultSet.getInt("idgence"));
-                agence.setNbEmployes(resultSet.getInt("neemployes"));
+                agence.setIdAgence(resultSet.getInt("idagence"));
+                agence.setNbEmployes(resultSet.getInt("nbemployes"));
                 VilleDaoImpl villeDao = new VilleDaoImpl(connection);
                 Ville ville = (Ville) villeDao.findById(resultSet.getInt("idville"));
                 agence.setIdVille(ville.getIdVille());
@@ -58,15 +58,13 @@ public class AgenceDaoImpl extends JdbcDao {
     public void create(Entity entity) throws DaoException {
         Agence agence = (Agence) entity;
         PreparedStatement statement = null;
-        String rqSql = "INSERT INTO agence(nbemployes,idville) values(?)";
+        String rqSql = "INSERT INTO agence(idagence,nbemployes,idville) values(?,?,?)";
         try {
             statement = connection.prepareStatement(rqSql);
+            statement.setInt(1,agence.getIdAgence());
+            statement.setInt(2,agence.getNbEmployes());
+            statement.setInt(3,agence.getIdVille());
             int res = statement.executeUpdate();
-            statement.setInt(1,agence.getNbEmployes());
-            statement.setInt(1,agence.getIdVille());
-            if (res >0){
-                System.out.println("Agence créé");
-            }
         }catch (SQLException e) {
             System.err.println("Erreur SQL : " +e.getLocalizedMessage());
         }
@@ -96,9 +94,7 @@ public class AgenceDaoImpl extends JdbcDao {
             statement = connection.prepareStatement(rqSql);
             statement.setInt(1,agence.getIdAgence());
             int res = statement.executeUpdate();
-            if(res>0){
-                System.out.println("Agence supprimé");
-            }
+
         }catch (SQLException e) {
             throw new DaoException(e);
         }

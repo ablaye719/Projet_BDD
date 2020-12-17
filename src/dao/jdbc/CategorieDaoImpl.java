@@ -24,8 +24,8 @@ public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
 
             while (resultSet.next()) {
                 Categorie categorie = new Categorie();
-                categorie.setId(resultSet.getInt("idCatégorie"));
-                categorie.setLibellé(resultSet.getString("LibelléCatégorie"));
+                categorie.setId(resultSet.getInt("idCategorie"));
+                categorie.setLibelle(resultSet.getString("LibelleCategorie"));
                 categories.add(categorie);
             }
         } catch (SQLException e) {
@@ -37,9 +37,9 @@ public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
 
     @Override
     public Entity findById(int id) throws DaoException {
-        Categorie catégorie = null;
+        Categorie categorie = null;
 
-        String sqlReq = "SELECT * FROM Catégorie WHERE idCatégorie = ?";
+        String sqlReq = "SELECT * FROM Categorie WHERE idCategorie = ?";
 
         PreparedStatement statement = null;
         try {
@@ -48,15 +48,15 @@ public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                catégorie = new Categorie();
-                catégorie.setId(resultSet.getInt("idCatégorie"));
-                catégorie.setLibellé(resultSet.getString("LibelléCatégorie"));
+                categorie = new Categorie();
+                categorie.setId(resultSet.getInt("idCategorie"));
+                categorie.setLibelle(resultSet.getString("LibelleCategorie"));
             }
         } catch (SQLException e) {
             throw new DaoException(e);
         }
 
-        return catégorie;
+        return categorie;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
 
         PreparedStatement stmt= null;
 
-        String sqlReq = "insert into Catégorie(idCatégorie,LibelléCatégorie) values (?,?)";
+        String sqlReq = "insert into Categorie(idCategorie,LibelleCategorie) values (?,?)";
 
         try {
 
@@ -94,7 +94,7 @@ public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
 
         PreparedStatement statement = null;
 
-        String sqlReq = "update Catégorie set idCatégorie = ? where idCatégorie = ?";
+        String sqlReq = "update Catégorie set idCatégorie = ? where idCategorie = ?";
         try {
             statement = connection.prepareStatement(sqlReq);
 
@@ -114,7 +114,7 @@ public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
 
         PreparedStatement statement = null;
 
-        String sqlReq = "delete from Catégorie where idCatégorie = ?";
+        String sqlReq = "delete from Categorie where idCategorie = ?";
         try {
             statement = connection.prepareStatement(sqlReq);
             statement.setInt(1, catégorie.getId());

@@ -8,6 +8,11 @@ public class Client extends Entity{
     private int idVille;
 
     public Client(){}
+
+    public Client(int id) {
+        idClient = id;
+    }
+
     public int getIdClient() {
         return idClient;
     }

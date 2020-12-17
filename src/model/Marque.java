@@ -5,6 +5,11 @@ public class Marque extends Entity{
     private String nomMarque;
 
     public Marque(){}
+
+    public Marque(int id) {
+        idMarque = id;
+    }
+
     public int getIdMarque() {
         return idMarque;
     }

@@ -48,7 +48,7 @@ public class TypeDaoImpl extends dao.jdbc.JdbcDao {
             while (resultSet.next()) {
                 type = new Type();
                 type.setId(resultSet.getInt("idType"));
-                type.setLibelle(resultSet.getString("libelléType"));
+                type.setLibelle(resultSet.getString("libelleType"));
             }
         } catch (SQLException e) {
             throw new DaoException(e);

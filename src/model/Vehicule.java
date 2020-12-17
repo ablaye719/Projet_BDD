@@ -14,6 +14,10 @@ public class Vehicule extends Entity{
 
     public Vehicule(){}
 
+    public Vehicule(int id) {
+        immatriculation = id;
+    }
+
     public String getDateMiseEnCirculation() {
         return dateMiseEnCirculation;
     }

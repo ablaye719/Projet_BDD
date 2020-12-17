@@ -5,7 +5,15 @@ public class Ville extends Entity{
     private String nomVille;
     private int nombreHabitants;
 
-    public Ville(){}
+    public Ville(int i){
+        idVille = i;
+    }
+
+    public Ville(int i, String nomVille, int i1) {
+        idVille = i;
+        this.nomVille = nomVille;
+        nombreHabitants = i1;
+    }
 
     public int getIdVille() {
         return idVille;

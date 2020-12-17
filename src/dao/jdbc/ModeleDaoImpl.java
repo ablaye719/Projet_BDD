@@ -51,8 +51,8 @@ public class ModeleDaoImpl extends dao.jdbc.JdbcDao {
 
             while (resultSet.next()) {
                 modele = new Modele();
-                modele.setId(resultSet.getInt("idModèle"));
-                modele.setDenomination(resultSet.getString("dénomination"));
+                modele.setId(resultSet.getInt("idmodele"));
+                modele.setDenomination(resultSet.getString("denomination"));
                 modele.setPuissanceFiscale(resultSet.getInt("puissanceFiscale"));
             }
         } catch (SQLException e) {

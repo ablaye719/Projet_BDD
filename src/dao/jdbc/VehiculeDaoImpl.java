@@ -34,7 +34,7 @@ public class VehiculeDaoImpl extends JdbcDao{
                 vehicule.setDateMiseEnCirculation(resultSet.getString("datemiseencirculation"));
                 vehicule.setEtat(resultSet.getString("etat"));
                 vehicule.setNbKilometres(resultSet.getDouble("nbkilometres"));
-                vehicule.setPrixJourLocation(resultSet.getDouble("prixjourlocation"));
+                vehicule.setPrixJourLocation(resultSet.getDouble("prixjourdelocation"));
                 Marque marque = (Marque) marqueDao.findById(resultSet.getInt("idmarque"));
                 vehicule.setIdMarque(marque.getIdMarque());
                 Modele modele = (Modele) modeleDao.findById(resultSet.getInt("idmodele"));
