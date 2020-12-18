@@ -9,6 +9,7 @@ import model.Ville;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 public class ClientDaoImpl extends JdbcDao {
     public ClientDaoImpl(Connection connection) {
@@ -112,4 +113,31 @@ public class ClientDaoImpl extends JdbcDao {
             throw new DaoException(e);
         }
     }
+
+    @Override
+    public Collection<Entity> faireUneLocation() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> retourdeVehicule() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> FaireUneFacture() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> nbVehiculesParMarque() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public int chiffredaffaire() throws DaoException {
+        return 0;
+    }
+
+
 }

@@ -100,4 +100,31 @@ public class VilleDaoImpl extends JdbcDao{
             throw new DaoException(e);
         }
     }
+
+    @Override
+    public Collection<Entity> faireUneLocation() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> retourdeVehicule() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> FaireUneFacture() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> nbVehiculesParMarque() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public int chiffredaffaire() throws DaoException {
+        return 0;
+    }
+
+
 }

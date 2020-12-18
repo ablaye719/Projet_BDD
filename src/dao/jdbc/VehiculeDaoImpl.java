@@ -6,6 +6,7 @@ import model.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 public class VehiculeDaoImpl extends JdbcDao{
     private MarqueDaoImpl marqueDao;
@@ -68,7 +69,7 @@ public class VehiculeDaoImpl extends JdbcDao{
                 vehicule.setDateMiseEnCirculation(resultSet.getString("datemiseencirculation"));
                 vehicule.setEtat(resultSet.getString("etat"));
                 vehicule.setNbKilometres(resultSet.getDouble("nbkilometres"));
-                vehicule.setPrixJourLocation(resultSet.getDouble("prixjourlocation"));
+                vehicule.setPrixJourLocation(resultSet.getDouble("prixjourdelocation"));
                 Marque marque = (Marque) marqueDao.findById(resultSet.getInt("idmarque"));
                 vehicule.setIdMarque(marque.getIdMarque());
                 Modele modele = (Modele) modeleDao.findById(resultSet.getInt("idmodele"));
@@ -142,4 +143,31 @@ public class VehiculeDaoImpl extends JdbcDao{
             throw new DaoException(e);
         }
     }
+
+    @Override
+    public Collection<Entity> faireUneLocation() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> retourdeVehicule() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> FaireUneFacture() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> nbVehiculesParMarque() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public int chiffredaffaire() throws DaoException {
+        return 0;
+    }
+
+
 }

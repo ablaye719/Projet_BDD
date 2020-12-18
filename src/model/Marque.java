@@ -3,6 +3,7 @@ package model;
 public class Marque extends Entity{
     private int idMarque;
     private String nomMarque;
+    private int nbrevehiculesparmarque;
 
     public Marque(){}
 
@@ -24,5 +25,13 @@ public class Marque extends Entity{
 
     public void setNomMarque(String nomMarque) {
         this.nomMarque = nomMarque;
+    }
+
+    public int getNbrevehiculesparmarque() {
+        return nbrevehiculesparmarque;
+    }
+
+    public void setNbrevehiculesparmarque(int nbrevehiculesparmarque) {
+        this.nbrevehiculesparmarque = nbrevehiculesparmarque;
     }
 }

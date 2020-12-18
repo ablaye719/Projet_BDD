@@ -9,8 +9,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 
 public class TestDao {
 
@@ -323,7 +327,7 @@ public class TestDao {
 
     }
     public void testAgence(){
-        System.out.println("=====Affichage des agences=====");
+        /**System.out.println("=====Affichage des agences=====");
         testFindAllAgence();
 
         System.out.println("=====Récupération de l'agence avec comme id=3=====");
@@ -339,40 +343,102 @@ public class TestDao {
         testFindAgenceByIdAgence(agence.getIdAgence());
 
         System.out.println("=====Supression de l'agence 5");
-        testDeleteAgence();
+        testDeleteAgence();**/
 
     }
-
-    public Collection<Entity> requete2() throws DaoException {
-        Statement statement = null;
-        Collection<Entity> loactions = new ArrayList<>();
+    public void faireUneLocation(){
+        dao = new LocationVoitureDaoImpl(connection);
+        Dao dao1 = new VehiculeDaoImpl(connection);
+        Dao dao2 = new ModeleDaoImpl(connection);
+        Dao dao3 = new MarqueDaoImpl(connection);
+        Dao dao4 = new VilleDaoImpl(connection);
+        Dao dao5 = new AgenceDaoImpl(connection);
         try {
-            statement = connection.createStatement();
-            String rq = "SELECT  v.idmodele,v.idmarque, v.immatriculation,v.prixJourDeLocation, c.idAgenceRetour\n" +
-                    "FROM vehicule as v\n" +
-                    "INNER JOIN Modele M on v.idModele = M.idModele\n" +
-                    "INNER JOIN Contrat C on v.immatriculation = C.immatriculation\n" +
-                    "INNER JOIN Agence A on A.idAgence = v.idAgence\n" +
-                    "INNER JOIN Client c1 on c1.idclient = C.idclient\n" +
-                    "WHERE c1.nomClient = 'Saliou' and C.dateRetrait = '24-10-2020' and C.dateRetour = '17-11-2020' and A.idAgence != C.idAgenceRetour;";
-            ResultSet resultSet = statement.executeQuery(rq);
-            while (resultSet.next()){
-                LocationVoiture locationVoiture = new LocationVoiture();
-                locationVoiture.setIdModele(resultSet.getInt("v.idmodele"));
-                loactions.add(locationVoiture);
-            }
 
-        }catch (SQLException e) {
-            throw new DaoException(e);
+            Collection<Entity> locations = dao.faireUneLocation();
+            for (Entity entity:locations){
+                LocationVoiture locationVoiture = (LocationVoiture) entity;
+                Vehicule vehicule = (Vehicule) dao1.findById(locationVoiture.getImmatriculation());
+                Modele modele = (Modele) dao2.findById(locationVoiture.getIdModele());
+                Marque marque = (Marque) dao3.findById(locationVoiture.getIdMarque());
+                Agence agence = (Agence) dao5.findById(locationVoiture.getIdAgecnceretour());
+                Ville ville = (Ville) dao4.findById(agence.getIdVille());
+                System.out.println(vehicule.getImmatriculation()+"|"+modele.getDenomination()+"|"+marque.getNomMarque()+"|"+agence.getIdAgence());
+            }
+        } catch (DaoException e) {
+            e.printStackTrace();
         }
-        return loactions;
+    }
+    public void retournerUneVoiture(){
+        dao = new RetourDeVehiculeDaoImpl(connection);
+        Dao dao1 = new VehiculeDaoImpl(connection);
+        Dao dao2 = new MarqueDaoImpl(connection);
+        try {
+            Collection<Entity> retours = dao.retourdeVehicule();
+            for(Entity entity:retours){
+                RetourDeVehicule retourDeVehicule = (RetourDeVehicule) entity;
+                Vehicule vehicule = (Vehicule) dao1.findById(retourDeVehicule.getImmatriculation());
+                Marque marque = (Marque) dao2.findById(vehicule.getIdMarque());
+                System.out.println(retourDeVehicule.getNomClient()+"|"+marque.getNomMarque()+"|"+retourDeVehicule.getDateDeRetrait()+"|");
+            }
+        }catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+    public void facture(){
+        dao = new FactureDaoImpl(connection);
+        try {
+            Collection<Entity> factures = dao.FaireUneFacture();
+            for(Entity entity:factures){
+                Facture facture = (Facture) entity;
+                System.out.println(facture.getId()+"|"+facture.getMontant());
+            }
+        }catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+    public void nbVehiculesParMarque(){
+        dao = new MarqueDaoImpl(connection);
+        try {
+            Collection<Entity> marques = dao.nbVehiculesParMarque();
+            for (Entity entity : marques){
+                Marque marque = (Marque) entity;
+                System.out.println(marque.getIdMarque()+"|"+marque.getNbrevehiculesparmarque());
+            }
+        }catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+    public void chiffreAffaire(){
+        dao = new FactureDaoImpl(connection);
+        try {
+            int chiffreAffaire = dao.chiffredaffaire();
+            System.out.println(chiffreAffaire);
+        }catch (DaoException e) {
+            e.printStackTrace();
+        }
+    }
+    public void testRequetes(){
+        System.out.println(("=====Une location====="));
+        faireUneLocation();
+
+        System.out.println(("=====Un retour de véhicule====="));
+        retournerUneVoiture();
+        System.out.println(("=====Une facture====="));
+        facture();
+
+        System.out.println(("=====Nombre de Véhicules par marques====="));
+        nbVehiculesParMarque();
+
+        System.out.println(("=====Chiffre d'affaire====="));
+        chiffreAffaire();
+
     }
 
     public static void main(String[] args) throws DaoException {
 
        TestDao testDao = new TestDao();
        //testDao.testVille();
-       //testDao.testAgence();
-        testDao.requete2();
+       testDao.testRequetes();
     }
 }

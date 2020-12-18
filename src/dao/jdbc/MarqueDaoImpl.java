@@ -7,6 +7,7 @@ import model.Marque;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 public class MarqueDaoImpl extends JdbcDao {
     public MarqueDaoImpl(Connection connection) {
@@ -109,4 +110,48 @@ public class MarqueDaoImpl extends JdbcDao {
         }
 
     }
+
+    @Override
+    public Collection<Entity> faireUneLocation() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> retourdeVehicule() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> FaireUneFacture() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> nbVehiculesParMarque() throws DaoException {
+        Collection<Entity> marques = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            String rq = "SELECT M.idMarque, count(V.idMarque) AS NbreVehiculesParMarque\n" +
+                    "FROM Vehicule as V\n" +
+                    "INNER JOIN Marque M on M.idMarque = V.idMarque\n" +
+                    "GROUP BY M.idMarque\n";
+            ResultSet resultSet = statement.executeQuery(rq);
+            while (resultSet.next()){
+                Marque marque = new Marque();
+                marque.setIdMarque(resultSet.getInt("idmarque"));
+                marque.setNbrevehiculesparmarque(resultSet.getInt("nbrevehiculesparmarque"));
+                marques.add(marque);
+            }
+        }catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return marques;
+    }
+
+    @Override
+    public int chiffredaffaire() throws DaoException {
+        return 0;
+    }
+
+
 }

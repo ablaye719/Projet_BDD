@@ -8,6 +8,7 @@ import model.Entity;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
 
@@ -125,5 +126,31 @@ public class CategorieDaoImpl extends dao.jdbc.JdbcDao {
         }
 
     }
+
+    @Override
+    public Collection<Entity> faireUneLocation() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> retourdeVehicule() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> FaireUneFacture() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public Collection<Entity> nbVehiculesParMarque() throws DaoException {
+        return null;
+    }
+
+    @Override
+    public int chiffredaffaire() throws DaoException {
+        return 0;
+    }
+
 
 }
