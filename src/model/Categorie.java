@@ -3,7 +3,7 @@ package model;
 public class Categorie extends Entity {
 
     private int id;
-    private String libellé;
+    private String libelle;
 
     public Categorie(){
         this(0);
@@ -11,13 +11,13 @@ public class Categorie extends Entity {
     public Categorie(int id){
         this(id,null);
     }
-    public Categorie(String libellé){
-        this.libellé=libellé;
+    public Categorie(String libelle){
+        this.libelle=libelle;
     }
     public Categorie(int id, String libelle){
         super();
         this.id=id;
-        this.libellé=libellé;
+        this.libelle=libelle;
     }
 
     public int getId() {
@@ -29,10 +29,10 @@ public class Categorie extends Entity {
     }
 
     public String getLibellé() {
-        return libellé;
+        return libelle;
     }
 
     public void setLibelle(String libellé) {
-        this.libellé = libellé;
+        this.libelle = libellé;
     }
 }
