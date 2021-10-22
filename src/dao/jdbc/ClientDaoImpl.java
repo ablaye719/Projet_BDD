@@ -22,7 +22,7 @@ public class ClientDaoImpl extends JdbcDao {
         VilleDaoImpl villeDao = new VilleDaoImpl(connection);
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM ville");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM client");
             while (resultSet.next()){
                 Client client = new Client();
                 client.setNomClient(resultSet.getString("nomclient"));
@@ -43,7 +43,7 @@ public class ClientDaoImpl extends JdbcDao {
     public Entity findById(int id) throws DaoException {
         Client client = null;
         VilleDaoImpl villeDao = new VilleDaoImpl(connection);
-        String rqSql = "SELECT * FROM client WHERE idclient ="+id;
+        String rqSql = "SELECT * FROM client WHERE idclient =?";
         PreparedStatement statement = null;
         try {
             statement=connection.prepareStatement(rqSql);

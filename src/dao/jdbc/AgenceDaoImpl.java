@@ -47,6 +47,7 @@ public class AgenceDaoImpl extends JdbcDao {
             ResultSet resultSet = statement.executeQuery("SELECT * FROM agence WHERE idagence="+id);
             while (resultSet.next()){
                 agence.setIdAgence(resultSet.getInt("idagence"));
+                agence.setIdVille(resultSet.getInt("idville"));
                 agence.setNbEmployes(resultSet.getInt("nbemployes"));
             }
         }catch (SQLException e) {

@@ -18,6 +18,19 @@ public class Vehicule extends Entity{
         immatriculation = id;
     }
 
+    public Vehicule(int i, String dateMiseEnCirculation, String etat, int i1, int i2, int i3, int i4, int i5, int i6, int i7) {
+        immatriculation = i;
+        this.dateMiseEnCirculation = dateMiseEnCirculation;
+        this.etat = etat;
+        nbKilometres = i1;
+        prixJourLocation = i2;
+        idMarque = i3;
+        idModele = i4;
+        idCategorie = i5;
+        idType = i6;
+        idAgence = i7;
+    }
+
     public String getDateMiseEnCirculation() {
         return dateMiseEnCirculation;
     }

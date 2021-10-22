@@ -92,7 +92,7 @@ public class VehiculeDaoImpl extends JdbcDao{
     public void create(Entity entity) throws DaoException {
         Vehicule vehicule = (Vehicule) entity;
         PreparedStatement statement = null;
-        String rqSql = "INSERT INTO vehicule(immatriculation,datemiseencirculation,etat,nbkilometres,prixjourlocation,idmarque,idmodele,idcategorie,idtype,idagence)";
+        String rqSql = "INSERT INTO vehicule(immatriculation,datemiseencirculation,etat,nbkilometres,prixjourlocation,idmarque,idmodele,idcategorie,idtype,idagence) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
             statement = connection.prepareStatement(rqSql);
             statement.setInt(1,vehicule.getImmatriculation());
@@ -114,6 +114,7 @@ public class VehiculeDaoImpl extends JdbcDao{
         PreparedStatement statement = null;
         String rqSql = "UPDATE vehicule SET datemiseencirculation = ?, etat = ?, nbkilometres = ?, prixjourlocation = ?, idmaarque = ?, idmodele = ?, idcategorie = ?, idtype = ?, idagence = ? WHERE immatriculation = ?";
         try {
+            statement = connection.prepareStatement(rqSql);
             statement.setInt(8,vehicule.getImmatriculation());
             statement.setString(1,vehicule.getEtat());
             statement.setString(2,vehicule.getDateMiseEnCirculation());

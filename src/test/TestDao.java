@@ -1,20 +1,12 @@
 package test;
-
 import dao.Dao;
 import dao.exception.DaoException;
 import dao.jdbc.*;
 import model.*;
 import sql.PostgresConnection;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collection;
-import java.util.Date;
+import java.util.Scanner;
 
 public class TestDao {
 
@@ -96,6 +88,8 @@ public class TestDao {
         try {
             Agence agence = (Agence) dao.findById(id);
             Ville ville = (Ville) dao1.findById(agence.getIdVille());
+            System.out.println(agence.getIdVille());
+            System.out.println(ville.getNomVille());
             System.out.println(agence.getIdAgence()+"|"+agence.getNbEmployes()+"|"+ville.getNomVille());
         }catch (DaoException e) {
             e.printStackTrace();
@@ -117,14 +111,14 @@ public class TestDao {
             e.printStackTrace();
         }
     }
-    public void testDeleteAgence(){
+    public void testDeleteAgence(int id ){
         dao = new AgenceDaoImpl(connection);
-        Agence agence = new Agence(5);
+        Agence agence = new Agence(id);
         try {
             dao.delete(agence);
-            agence = (Agence) dao.findById(5);
+            agence = (Agence) dao.findById(id);
             if(agence == null){
-                System.out.println("agence5 supprimé");
+                System.out.println("agence"+id+"supprimé");
             }
         } catch (DaoException e) {
             e.printStackTrace();
@@ -168,9 +162,9 @@ public class TestDao {
             e.printStackTrace();
         }
     }
-    public void testDeleteMarque(){
+    public void testDeleteMarque(int id){
         dao = new MarqueDaoImpl(connection);
-        Marque marque = new Marque(4);
+        Marque marque = new Marque(id);
         try {
             dao.delete(marque);
         }catch (DaoException e) {
@@ -218,8 +212,8 @@ public class TestDao {
             e.printStackTrace();
         }
     }
-    public void testDelete(){
-        Client client = new Client(4);
+    public void testDeleteClient(int id){
+        Client client = new Client(id);
         try {
             dao.delete(client);
         }catch (DaoException e) {
@@ -262,7 +256,7 @@ public class TestDao {
             Type type = (Type) dao3.findById(vehicule.getIdType());
             Categorie categorie = (Categorie) dao4.findById(vehicule.getIdCategorie());
             Agence agence = (Agence) dao5.findById(vehicule.getIdAgence());
-            System.out.println(vehicule.getImmatriculation()+"|"+vehicule.getDateMiseEnCirculation()+"|"+vehicule.getEtat()+"|"+vehicule.getNbKilometres()+"|"+vehicule.getPrixJourLocation()+"|"+marque.getNomMarque()+"|"+modele.getDenomination()+"|"+categorie.getLibellé()+"|"+type.getLibelle()+"|"+agence.getIdAgence());
+            System.out.println(vehicule.getImmatriculation()+"|"+vehicule.getDateMiseEnCirculation()+"|"+vehicule.getEtat()+"|"+vehicule.getNbKilometres()+"|"+vehicule.getPrixJourLocation()+"|"+marque.getNomMarque()+"|"+categorie.getLibellé()+"|"+type.getLibelle()+"|"+agence.getIdAgence());
         }catch (DaoException e) {
             e.printStackTrace();
         }
@@ -283,8 +277,8 @@ public class TestDao {
             e.printStackTrace();
         }
     }
-    public void testDeleteVehicule() {
-        Vehicule vehicule = new Vehicule(7);
+    public void testDeleteVehicule(int id) {
+        Vehicule vehicule = new Vehicule(id);
         try {
             dao.delete(vehicule);
             vehicule = (Vehicule) dao.findById(100);
@@ -306,7 +300,16 @@ public class TestDao {
         testFindByIdVille(2);
 
         System.out.println("*****Création d'une ville");
-        Ville ville = new Ville(11,"Dakar",3000000);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Entrer l'id de la ville que voulez créer");
+        int a = sc.nextInt();
+        Scanner sc1 = new Scanner(System.in);
+        System.out.println("Entrer le nom de la ville que voulez créer");
+        String b = sc1.nextLine();
+        Scanner sc2 = new Scanner(System.in);
+        System.out.println("Entrer le nombre d'habitant de la ville que voulez créer");
+        int c = sc2.nextInt();
+        Ville ville = new Ville(a,b,c);
         testCreateVille(ville);
         testFindByIdVille(4);
 
@@ -327,23 +330,101 @@ public class TestDao {
 
     }
     public void testAgence(){
-        /**System.out.println("=====Affichage des agences=====");
+        System.out.println("=====Affichage des agences=====");
         testFindAllAgence();
 
         System.out.println("=====Récupération de l'agence avec comme id=3=====");
         testFindAgenceByIdAgence(3);
 
         System.out.println("=====Création d'un agence=====");
-        Agence agence = new Agence(5,34,2);
+        Scanner sc = new Scanner(System.in);
+        Scanner sc1 = new Scanner(System.in);
+        Scanner sc2 = new Scanner(System.in);
+
+        System.out.println("Entrer l'id de l'agence que vous voulez créer");
+        int a = sc.nextInt();
+        System.out.println("Entrer le nombre d'employé de l'agence que vous voulez créer");
+        int b = sc1.nextInt();
+
+        System.out.println("Entrer l'id de l'agence que vous voulez créer");
+        int c = sc2.nextInt();
+        Agence agence = new Agence(a,b,c);
         testCreateAgence(agence);
-        testFindAgenceByIdAgence(5);
+        testFindAgenceByIdAgence(10);
 
         System.out.println("=====Modification de l'agence 5");
         agence.setNbEmployes(50);
+        testUpdateAgence(agence);
         testFindAgenceByIdAgence(agence.getIdAgence());
 
-        System.out.println("=====Supression de l'agence 5");
-        testDeleteAgence();**/
+        System.out.println("=====Supression de l'agence 10");
+        testDeleteAgence(10);
+
+    }
+    public void testMarque(){
+        System.out.println("***** Toutes les marques *****");
+        testFindAllMarque();
+
+        System.out.println("=====Récupération de la marque avec comme id=2=====");
+        testFindByIdMarque(2);
+
+        System.out.println("=====Création d'un agence=====");
+        Marque marque = new Marque(20,"Volvo");
+        testCreateMarque(marque);
+
+
+        System.out.println("=====Modification de la marque 20");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Entrer l'id de la marque que vous voulez modifier");
+        int a = sc.nextInt();
+        Marque marque1 = new Marque(a);
+        marque1.setNomMarque("BMW");
+        testUpdateMarque(marque1);
+        testFindByIdMarque(20);
+
+        System.out.println("=====Supression de la marque 20");
+        testDeleteMarque(20);
+    }
+    public void testClient(){
+        System.out.println("***** Toutes les clients *****");
+        testFindAllClients();
+
+        System.out.println("=====Récupération du client avec comme id=1=====");
+        testFindByIdClient(1);
+
+        System.out.println("=====Création d'un client=====");
+        Client client = new Client(9,"Xyxyxyxy");
+        testCreateClient(client);
+
+        System.out.println("=====Modification du client avec id = 9");
+        client.setNomClient("azerty");
+        testUpdateClient(client);
+
+        System.out.println("=====Supression du client 9");
+        testDeleteClient(9);
+
+    }
+    public void testVehicules(){
+        System.out.println("***** Toutes les Véhicules *****");
+        testFindAllVehicules();
+
+        System.out.println("=====Récupération d'une véhicules avec comme id=4=====");
+        testFindByIdVehicule(4);
+
+        System.out.println("=====Création d'une vehicules=====");
+        Vehicule vehicule = new Vehicule(13,"12-12-2018","bien",10000,70,1,3,2,1,2);
+        testCreateVehicule(vehicule);
+        testFindByIdVehicule(13);
+
+        System.out.println("=====Modification de la véhicules  avec id = 9");
+        vehicule.setIdMarque(2);
+        testUpdateVehicule(vehicule);
+        testFindByIdVehicule(13);
+
+        System.out.println("=====Supression de la véhicules 9");
+        testDeleteVehicule(9);
+
+
 
     }
     public void faireUneLocation(){
@@ -438,7 +519,13 @@ public class TestDao {
     public static void main(String[] args) throws DaoException {
 
        TestDao testDao = new TestDao();
-       //testDao.testVille();
+       testDao.testVille();
+       testDao.testAgence();
+       testDao.testMarque();
+       testDao.testClient();
+       testDao.testVehicules();
        testDao.testRequetes();
+
+
     }
 }

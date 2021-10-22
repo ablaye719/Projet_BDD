@@ -75,7 +75,7 @@ public class MarqueDaoImpl extends JdbcDao {
     public void update(Entity entity) throws DaoException {
         Marque marque = (Marque) entity;
         PreparedStatement statement = null;
-        String rqSql = "UPDATE marque SET  nommarque = ?, WHERE idmarque = ?";
+        String rqSql = "UPDATE marque SET  nommarque = ? WHERE idmarque = ?";
         try {
             statement = connection.prepareStatement(rqSql);
             statement.setString(1,marque.getNomMarque());

@@ -11,6 +11,11 @@ public class Marque extends Entity{
         idMarque = id;
     }
 
+    public Marque(int i, String libelle) {
+        idMarque = i;
+        nomMarque = libelle;
+    }
+
     public int getIdMarque() {
         return idMarque;
     }

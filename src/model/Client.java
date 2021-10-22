@@ -13,6 +13,11 @@ public class Client extends Entity{
         idClient = id;
     }
 
+    public Client(int i, String nomClient) {
+        idClient = i;
+        this.nomClient = nomClient;
+    }
+
     public int getIdClient() {
         return idClient;
     }
